@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Say anything you want.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="og:title" content="Type anything.">
+    <meta name="og:description" content="Say anything you want.">
+    <meta name="og:image" itemprop="image" content="https://typeanything.ml/TypeAnything.png">
+    <link rel="shortcut icon" href="./default.png"/>
+    <title>Type Anything.</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: aliceblue;
+            text-align: center;
+        }
+        #main{
+            margin-top: 42vh;
+        }
+        #main:focus-within #input{
+            padding-left: 24px;
+            box-shadow: 0 15px 30px #bbb;
+        }
+        #main:focus-within #submit{
+            box-shadow: 0 15px 30px #bbb;
+        }
+        .prompt{
+            transition: 0.2s ease;
+            box-shadow: 0 15px 60px #bbb;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #input{
+            box-sizing: border-box;
+            width: 500px;
+            max-width: 70%;
+            height: 70px;
+            padding-left: 20px;
+            background-color: #fff;
+            border: none;
+            border-radius: 12px 0 0 12px;
+            outline: none;
+        }
+        #submit{
+            width: 100px;
+            max-width: 20%;
+            height: 70px;
+            color: #fff;
+            background-color: #000;
+            border: none;
+            border-radius: 0 12px 12px 0;
+            outline: none;
+            cursor: pointer;
+        }
+        #tip{
+            color: transparent;
+            cursor: default;
+        }
+        @media screen and (max-width: 420px) {
+            #main{
+                margin-top: 36vh;
+            }
+            .prompt{
+                box-shadow: none;
+                font-size: 12px;
+            }
+            #input{
+                height: 60px;
+                border: 2px solid #000;
+            }
+            #submit{
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        Enable that fucking JavaScript you little sussy baka.
+        <br/>
+        Like that little extra "privacy" or "security" from disabling this feature really helps smh.
+    </noscript>
+    <div id="main">
+        <input id="input" class="prompt" type="text" placeholder="Say anything you want." autofocus/><button id="submit" class="prompt" onclick="button()">Button</button>
+        <p id="tip">No one is spying.</p>
+    </div>
+    <script>
+        const colors = ["f0f8ff","eeffff","ffeeff","ffffee","eeeeff","ffeeee","eeffee","eeeeee"];
+        const color = colors[parseInt(Math.random()*colors.length)];
+        document.getElementsByTagName("body")[0].style.backgroundColor = "#" + color;
+        document.getElementsByTagName("link")[0].href = "https://ui-avatars.com/api/?size=32&name=TA&bold=true&font-size=0.6&background=" + color;
+        document.querySelector("meta[name=theme-color]").content = "#" + color;
+        const userID = parseInt(Math.random()*9000+1000);
+        const input = document.getElementById("input");
+        const submit = document.getElementById("submit");
+        const request = new XMLHttpRequest();
+        function button(){
+            let text = input.value;
+            if(text.includes("@everyone") || text.includes("@here")){
+                // alert("Fuck you little sussy baka");
+                text = text.replaceAll("@", "*");
+                text += "\n*System: Everyone/here ping detected. Replaced automatically.*"
+            }
+            if(!text){
+                return;
+            }
+            const params = {
+                username: userID + " TUID",
+                avatar_url: "https://ui-avatars.com/api/?size=128&name=" + userID + "&length=4&font-size=0.36&bold=true&background=" + color,
+                content: text
+            }
+            request.open("POST", "https://discord.com/api/webhooks/914026247972069386/m8oDO3ILSIujlH-8OJOgR0Z8GsjU_G7zcwKiQwSe113zriz6l2hnv7ek2wsU6qRbw3ty");
+            request.setRequestHeader("Content-type", "application/json");
+            // request.send(JSON.stringify(params));
+            submit.style.transition = "none";
+            submit.style.backgroundColor = "#eee";
+            submit.style.color = "#000";
+            submit.innerHTML = "Pressed!";
+            input.value = "";
+            input.focus();
+            setTimeout(function(){
+                submit.style.transition = "0.5s ease";
+                submit.style.backgroundColor = "#000";
+                submit.style.color = "#fff";
+                setTimeout(function(){
+                    submit.innerHTML= "Button";
+                }, 50);
+            }, 600);
+        }
+        document.onkeydown = function(){
+            if (event.keyCode == 13){
+                button();
+            }
+            if (event.keyCode == 191 && input !== document.activeElement){
+                event.preventDefault();
+                input.focus();
+            }
+        }
+        console.info("by Fengzi Lab.");
+    </script>
+</body>
+</html>
