@@ -114,10 +114,8 @@
                 avatar_url: "https://ui-avatars.com/api/?size=128&name=" + userID + "&length=4&font-size=0.36&bold=true&background=" + color,
                 content: text
             }
-            request.open("POST", "https://discord.com/api/webhooks/914026247972069386/m8oDO3ILSIujlH-8OJOgR0Z8GsjU_G7zcwKiQwSe113zriz6l2hnv7ek2wsU6qRbw3ty");
+            request.open("POST", "https://typeanything.fengzi.workers.dev/");
             request.setRequestHeader("Content-type", "application/json");
-            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            request.setRequestHeader('Access-Control-Allow-Origin', '*');
             request.send(JSON.stringify(params));
             submit.style.transition = "none";
             submit.style.backgroundColor = "#eee";
