@@ -116,7 +116,9 @@
             }
             request.open("POST", "https://discord.com/api/webhooks/914026247972069386/m8oDO3ILSIujlH-8OJOgR0Z8GsjU_G7zcwKiQwSe113zriz6l2hnv7ek2wsU6qRbw3ty");
             request.setRequestHeader("Content-type", "application/json");
-            // request.send(JSON.stringify(params));
+            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            request.setRequestHeader('Access-Control-Allow-Origin', '*');
+            request.send(JSON.stringify(params));
             submit.style.transition = "none";
             submit.style.backgroundColor = "#eee";
             submit.style.color = "#000";
